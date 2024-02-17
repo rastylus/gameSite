@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Die from "../components/Die";
+
 
 function Home() {
   const [count, setCount] = useState(0);
   const [color, setColor] = useState("purple");
   const [opacity, setOpacity] = useState(1);
-  const [num, setNum] = useState(0);
+  const [num1, setNum1] = useState(0);
+  const [num2, setNum2] = useState(0);
 
   const randomNumberInRange = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
     // return Math.random();
   };
 
+
   const handleClick = () => {
-    setNum(randomNumberInRange(1, 6));
+    setNum1(randomNumberInRange(1, 6));
+    setNum2(randomNumberInRange(1, 6));
   };
 
   const changeColor = () => {
@@ -26,14 +31,6 @@ function Home() {
 
   const backgroundColors = count % 2 === 0 ? "#808000" : "lightskyblue";
 
-  let dice = [
-    "diceSides/dice-six-faces-one.png",
-    "diceSides/dice-six-faces-two.png",
-    "diceSides/dice-six-faces-three.png",
-    "diceSides/dice-six-faces-four.png",
-    "diceSides/dice-six-faces-five.png",
-    "diceSides/dice-six-faces-six.png",
-  ];
 
   return (
     <div
@@ -45,10 +42,9 @@ function Home() {
       }}
     >
       <div className="card">
-        <h2>Number is: {num}</h2>
-        <div>
-          <img style={{ height: "25vh" }} src={dice[num - 1]} />
-        </div>
+        <h2>Number is: {num1}, {num2}</h2>
+        <Die num={num1}/>
+        <Die num={num2}/>
         <div>
           <button onClick={handleClick}>Click Me Generate</button>
         </div>
@@ -58,11 +54,13 @@ function Home() {
           </button>
         </div>
         <p style={{ padding: "2vh" }}>
-          <Link to="/test">test</Link>
+          <Link to="/test" style={{ color: "black" }}>
+            test
+          </Link>
         </p>
-        <p style={{ padding: "2vh" }}>
+        {/* <p style={{ padding: "2vh" }}>
           <Link to="/play">play</Link>
-        </p>
+        </p> */}
         <button onClick={changeColor}>Change Color</button>
         <div style={{ padding: "2vh" }}>
           <label htmlFor="opacityRange">Change Opacity:</label>
